@@ -11,7 +11,7 @@ export default async function GamePage({
   return (
     <div>
       <NavBar categoryName={categoryName} />
-      <Game />
+      <Game categoryName={categoryName} />
     </div>
   );
 }

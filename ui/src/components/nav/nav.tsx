@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { BackButton } from "./back-button";
 
-interface NavBarProps {
+type NavBarProps = {
   categoryName: string;
-}
+};
 
 export const NavBar: FC<NavBarProps> = ({ categoryName }) => {
   return (
