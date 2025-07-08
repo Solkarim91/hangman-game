@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { Keyboard } from "./keyboard";
 import { categoryWords } from "@/lib/category-words";
 import { getRandomInt, formatGamePhrase, cn } from "@/lib/utils";
@@ -12,6 +12,7 @@ import { GameStatusType, UsedLetterType } from "./types";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 type GameProps = {
   categoryName: string;
@@ -32,10 +33,14 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
 
   const isMobile = useIsMobile();
 
-  useEffect(() => {
+  const getNewGameWords = useCallback(() => {
     const words = categoryWords[categoryName];
     const gameWord = words[getRandomInt(words.length)].toUpperCase();
     setGameWords(formatGamePhrase(gameWord));
+  }, [categoryName]);
+
+  useEffect(() => {
+    getNewGameWords();
   }, [categoryName]);
 
   console.log("gameWords: ", gameWords);
@@ -68,11 +73,20 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
     }
   }, [usedLetters, gameWords]);
 
+  const handlePlayAgainButtonClick = useCallback(() => {
+    getNewGameWords();
+    setUsedLetters({});
+    setGameStatus("playing");
+  }, [getNewGameWords]);
+
+  const router = useRouter();
+  const handleNewCategoryButtonClick = () => router.back();
+
   return (
     <div className="p-20 w-[100%] h-[90vh] flex flex-col justify-between">
       <h1 className="text-2xl font-bold">Hangman Game</h1>
       {gameStatus === "won" && (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-15">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -81,6 +95,24 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
           >
             🎉 YOU WON!!! 🎉
           </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
+            className="text-4xl font-bold font-main justify-items-center"
+          >
+            <div className="flex flex-col items-center gap-3 *:text-2xl *:px-20 *:w-[30%]">
+              <Button variant={"outline"} onClick={handlePlayAgainButtonClick}>
+                {"PLAY AGAIN"}
+              </Button>
+              <Button
+                variant={"outline"}
+                onClick={handleNewCategoryButtonClick}
+              >
+                {"NEW CATEGORY"}
+              </Button>
+            </div>
+          </motion.div>
         </div>
       )}
       {gameWords ? (
@@ -88,7 +120,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
           <AnimatePresence>
             <motion.div
               initial={{ y: 0 }}
-              animate={{ y: gameStatus === "won" ? 50 : 0 }} // move down on win
+              animate={{ y: gameStatus === "won" ? 50 : 0 }}
               transition={{ type: "spring", stiffness: 120, damping: 15 }}
               className="flex flex-wrap gap-x-12 gap-y-4 max-w-[100vw] justify-center"
             >
