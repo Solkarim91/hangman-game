@@ -1,16 +1,15 @@
 import { cn } from "@/lib/utils";
 import { FC } from "react";
+import { LetterTileType } from "./types";
 
 type LetterTileProps = {
   char: string;
-  index: number;
   containsLongWords: boolean;
-  state?: "correct" | "default";
+  state?: LetterTileType;
 };
 
 export const LetterTile: FC<LetterTileProps> = ({
   char,
-  index,
   containsLongWords,
   state,
 }) => {
@@ -31,9 +30,13 @@ export const LetterTile: FC<LetterTileProps> = ({
           invisible: isSpace,
         }
       )}
-      aria-label={isSpace ? "Space" : `Char ${char}`} //TODO: replace label when the char is hidden
+      aria-label={
+        isSpace
+          ? "Space"
+          : `Character ${char.replace(char, state === "correct" ? `'${char}'` : "'_'")}`
+      }
     >
-      {isSpace ? null : char}
+      {isSpace ? null : char.replace(char, state === "correct" ? char : "_")}
     </div>
   );
 };

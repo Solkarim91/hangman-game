@@ -2,12 +2,7 @@
 
 import React, { FC } from "react";
 import { KeyButton } from "./key-button";
-
-const QWERTY_LAYOUT = [
-  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-  ["z", "x", "c", "v", "b", "n", "m"],
-];
+import { QWERTY_LAYOUT } from "./constants";
 
 type KeyboardProps = {
   onKeyClick: (letter: string) => void;
@@ -27,7 +22,6 @@ export const Keyboard: FC<KeyboardProps> = ({
               key={letter}
               letter={letter}
               onClick={onKeyClick}
-              // disabled={usedLetters[letter] !== "default"}
               disabled={
                 usedLetters[letter] && usedLetters[letter] !== "default"
               }

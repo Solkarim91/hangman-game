@@ -7,23 +7,23 @@ import { getRandomInt, formatGamePhrase, cn } from "@/lib/utils";
 import Loading from "@/app/loading";
 import { LetterTile } from "./letter-tile";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { checkUserWon } from "./utils";
+import { GameStatusType, UsedLetterType } from "./types";
+import { motion, AnimatePresence } from "framer-motion";
+import confetti from "canvas-confetti";
+import { Button } from "../ui/button";
 
 type GameProps = {
   categoryName: string;
 };
 
 export const Game: FC<GameProps> = ({ categoryName }) => {
+  const [gameStatus, setGameStatus] = useState<GameStatusType>("playing");
   const [usedLetters, setUsedLetters] = useState<
-    Record<string, "correct" | "incorrect" | "default">
+    Record<string, UsedLetterType>
   >({});
 
   const [gameWords, setGameWords] = useState<string[] | undefined>();
-
-  useEffect(() => {
-    const words = categoryWords[categoryName];
-    const gameWord = words[getRandomInt(words.length)].toUpperCase();
-    setGameWords(formatGamePhrase(gameWord));
-  }, [categoryName]);
 
   const containsLongWords = useMemo(
     () => Boolean(gameWords?.find((word) => word.length >= 8)),
@@ -31,48 +31,96 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
   );
 
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    const words = categoryWords[categoryName];
+    const gameWord = words[getRandomInt(words.length)].toUpperCase();
+    setGameWords(formatGamePhrase(gameWord));
+  }, [categoryName]);
+
+  console.log("gameWords: ", gameWords);
+
   const useCondensedSpacing = useMemo(
     () => containsLongWords && isMobile,
     [containsLongWords, isMobile]
   );
 
   const handleKeyClick = (letter: string) => {
-    // Mock check
-    const isCorrect = Math.random() > 0.5;
-    console.log("isCorrect: ", isCorrect);
+    const isCorrect = gameWords?.some((word) => word.includes(letter));
     setUsedLetters((prev) => ({
       ...prev,
       [letter]: isCorrect ? "correct" : "incorrect",
     }));
   };
 
+  useEffect(() => {
+    if (!gameWords) return;
+
+    const hasWon = checkUserWon(gameWords, usedLetters);
+
+    if (hasWon) {
+      setGameStatus("won");
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 },
+      });
+    }
+  }, [usedLetters, gameWords]);
+
   return (
     <div className="p-20 w-[100%] h-[90vh] flex flex-col justify-between">
       <h1 className="text-2xl font-bold">Hangman Game</h1>
+      {gameStatus === "won" && (
+        <div className="flex flex-col gap-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="text-4xl font-bold text-center font-main"
+          >
+            🎉 YOU WON!!! 🎉
+          </motion.div>
+        </div>
+      )}
       {gameWords ? (
         <div className="flex flex-wrap gap-x-12 gap-y-4 max-w-[100vw] justify-center">
-          {gameWords.map((word, wordIndex) => (
-            <div
-              key={wordIndex}
-              className={cn("flex", useCondensedSpacing ? "gap-1" : "gap-2")}
+          <AnimatePresence>
+            <motion.div
+              initial={{ y: 0 }}
+              animate={{ y: gameStatus === "won" ? 50 : 0 }} // move down on win
+              transition={{ type: "spring", stiffness: 120, damping: 15 }}
+              className="flex flex-wrap gap-x-12 gap-y-4 max-w-[100vw] justify-center"
             >
-              {word.split("").map((char, charIndex) => (
-                <LetterTile
-                  key={`${wordIndex}-${charIndex}`}
-                  index={charIndex}
-                  char={char}
-                  state={"default"}
-                  containsLongWords={containsLongWords}
-                />
+              {gameWords.map((word, wordIndex) => (
+                <div
+                  key={`word-${wordIndex}`}
+                  className={cn(
+                    "flex",
+                    useCondensedSpacing ? "gap-1" : "gap-2"
+                  )}
+                >
+                  {word.split("").map((char, charIndex) => (
+                    <LetterTile
+                      key={`word-${wordIndex}-char-${charIndex}`}
+                      char={char}
+                      state={usedLetters[char] ? "correct" : "default"}
+                      containsLongWords={containsLongWords}
+                    />
+                  ))}
+                </div>
               ))}
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       ) : (
         <Loading />
       )}
-
-      <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} />
+      <div>
+        {gameStatus === "playing" && (
+          <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} />
+        )}
+      </div>
     </div>
   );
 };

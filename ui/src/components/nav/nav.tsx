@@ -7,9 +7,11 @@ type NavBarProps = {
 
 export const NavBar: FC<NavBarProps> = ({ categoryName }) => {
   return (
-    <nav className="flex justify-between font-main text-4xl p-5 bg-[#33b3ee] text-white w-[100%] text-center rounded-b-2xl">
+    <nav className="flex justify-between font-main text-4xl p-5 bg-[#33b3ee] text-white w-[100%] text-center rounded-b-2xl relative">
       <BackButton />
-      <p>{categoryName[0].toUpperCase() + categoryName.slice(1)}</p>
+      <p className="absolute left-0 right-0">
+        {categoryName[0].toUpperCase() + categoryName.slice(1)}
+      </p>
       <div></div>
     </nav>
   );

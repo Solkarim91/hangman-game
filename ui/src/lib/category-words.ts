@@ -97,7 +97,6 @@ export const categoryWords: Record<string, string[]> = {
     "Lesotho",
     "Liberia",
     "Libya",
-    "Liechtenstein",
     "Lithuania",
     "Luxembourg",
     "Madagascar",
