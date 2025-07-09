@@ -5,8 +5,8 @@ export const Logo = () => (
     <Image
       src="/hangman-logo.png"
       alt="Hangman logo"
-      width={150}
-      height={32}
+      width={200}
+      height={43}
       priority
     />
     <h1 className="font-main text-3xl">HANGMAN</h1>
