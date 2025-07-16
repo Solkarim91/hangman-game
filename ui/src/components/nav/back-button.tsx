@@ -6,5 +6,9 @@ export const BackButton = () => {
   const router = useRouter();
   const handleBackButtonClick = () => router.back();
 
-  return <button onClick={handleBackButtonClick}>🔙</button>;
+  return (
+    <button className="z-1" onClick={handleBackButtonClick}>
+      🔙
+    </button>
+  );
 };
