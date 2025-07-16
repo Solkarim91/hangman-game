@@ -1,6 +1,5 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import { Logo } from "@/components/ui/logo";
 import { Category, CATEGORY_TITLES } from "./constants";
 import { Button } from "@/components/ui/button";
