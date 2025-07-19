@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔤 Hangman Word Game
 
-## Getting Started
+A fun and interactive word-guessing game where players uncover hidden phrases by selecting letters. Featuring responsive animations, category-based word sets, and dynamic win/loss states.
 
-First, run the development server:
+---
+
+## 🎮 Gameplay Preview
+
+* **Playing:** ![Playing the Game](https://ibb.co/sJ3V6MpN)
+* **Winning:** ![Win State](https://ibb.co/8Hj2L0G)
+* **Losing:** ![Lose State](https://ibb.co/zWGyZhWj)
+
+---
+
+## ✨ Features
+
+* ✅ Dynamic category-based word generation
+* 🎯 Responsive keyboard input
+* ❤️ Lives-based gameplay mechanics
+* 🔠 Animated tiles for letter reveals
+* 🎉 Confetti celebration on win
+* 🔁 Replay or select a new category
+* 📱 Mobile-optimized layout
+
+---
+
+## 🛠️ Tech Stack
+
+* **React** + **Next.js** (App Router)
+* **TypeScript**
+* **Tailwind CSS** for styling
+* **Framer Motion** for animations
+* **Canvas Confetti** for win effects
+
+---
+
+## ⚙️ Getting Started
+
+Clone the repository:
+
+```bash
+git clone git@github.com:Solkarim91/hangman-game.git
+cd hangman-game
+```
+
+Install dependencies:
+
+```bash
+cd ui
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to start playing.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Project Structure
 
-## Learn More
+```
+├── app/
+├── components/
+│   ├── carousel/
+│   ├── game/
+│   ├── nav/
+│   ├── ui/
+├── hooks/
+│   └── use-game-logic.ts
+├── lib/
+├── public/
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛣️ Roadmap
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* [ ] Add difficulty level selector
+* [ ] Track player stats (wins/losses)
+* [ ] Improve accessibility (ARIA roles, screen reader support)
+* [ ] Improved responsive layout for larger screen sizes
+* [ ] Deploy live demo
