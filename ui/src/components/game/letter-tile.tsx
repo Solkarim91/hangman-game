@@ -1,12 +1,13 @@
 import { cn } from "@/lib/utils";
 import { FC } from "react";
-import { GameStatusType, LetterTileType } from "./types";
+import { GameStatusType, LetterTileStateType } from "./types";
 import { getTileString } from "./utils";
+import { LETTER_TILE_STATE } from "./constants";
 
 type LetterTileProps = {
   char: string;
   containsLongWords: boolean;
-  state: LetterTileType;
+  state: LetterTileStateType;
   gameStatus: GameStatusType;
 };
 
@@ -28,15 +29,15 @@ export const LetterTile: FC<LetterTileProps> = ({
           "w-12": !containsLongWords,
           "w-8": containsLongWords,
           "bg-[#6097b9] text-white hover:bg-gray-400":
-            state === "default" && !isSpace,
-          "bg-green-500 text-white": state === "correct",
+            state === LETTER_TILE_STATE.default && !isSpace,
+          "bg-green-500 text-white": state === LETTER_TILE_STATE.correct,
           invisible: isSpace,
         }
       )}
       aria-label={
         isSpace
           ? "Space"
-          : `Character ${char.replace(char, state === "correct" ? `'${char}'` : "'_'")}`
+          : `Character ${char.replace(char, state === LETTER_TILE_STATE.correct ? `'${char}'` : "'_'")}`
       }
     >
       {getTileString(char, isSpace, state, gameStatus)}

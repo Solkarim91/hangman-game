@@ -2,11 +2,12 @@
 
 import React, { FC } from "react";
 import { KeyButton } from "./key-button";
-import { QWERTY_LAYOUT } from "./constants";
+import { LETTER_STATE, QWERTY_LAYOUT } from "./constants";
+import { LetterStateType } from "./types";
 
 type KeyboardProps = {
   onKeyClick: (letter: string) => void;
-  usedLetters?: Record<string, "correct" | "incorrect" | "default">;
+  usedLetters?: Record<string, LetterStateType>;
 };
 
 export const Keyboard: FC<KeyboardProps> = ({
@@ -23,9 +24,10 @@ export const Keyboard: FC<KeyboardProps> = ({
               letter={letter}
               onClick={onKeyClick}
               disabled={
-                usedLetters[letter] && usedLetters[letter] !== "default"
+                usedLetters[letter] &&
+                usedLetters[letter] !== LETTER_STATE.default
               }
-              state={usedLetters[letter] || "default"}
+              state={usedLetters[letter] || LETTER_STATE.default}
             />
           ))}
         </div>
