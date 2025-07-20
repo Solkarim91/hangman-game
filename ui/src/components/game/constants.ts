@@ -1,4 +1,4 @@
-import { DifficultyType, GameStatusType, UserSelectionFeedbackType } from "./types";
+import { DifficultyType, GameStatusType, LetterStateType, LetterTileStateType, UserSelectionFeedbackType } from "./types";
 
 export const QWERTY_LAYOUT: string[][] = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -10,6 +10,17 @@ export const DIFFICULTY: Record<string, DifficultyType> = {
   easy: "easy",
   medium: "medium",
   difficult: "difficult",
+};
+
+export const LETTER_STATE: Record<string, LetterStateType> = {
+  correct: "correct",
+  incorrect: "incorrect",
+  default: "default",
+};
+
+export const LETTER_TILE_STATE: Record<string, LetterTileStateType> = {
+  correct: "correct",
+  default: "default",
 };
 
 export const USER_FEEDBACK_MESSAGES: Record<string, UserSelectionFeedbackType> = {

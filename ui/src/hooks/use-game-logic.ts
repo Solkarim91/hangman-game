@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import confetti from "canvas-confetti";
-import { DIFFICULTY, GAME_STATUS } from "@/components/game/constants";
+import { DIFFICULTY, GAME_STATUS, LETTER_STATE } from "@/components/game/constants";
 import { checkUserLost, checkUserWon, getFeedbackMessage, getMaxLives } from "@/components/game/utils";
-import { DifficultyType, GameStatusType, UsedLetterType } from "@/components/game/types";
+import { DifficultyType, GameStatusType, LetterStateType } from "@/components/game/types";
 import { categoryWords } from "@/lib/category-words";
 import { formatGamePhrase, getRandomInt } from "@/lib/utils";
 
@@ -14,7 +14,7 @@ type UseGameLogicProps = {
 type UseGameLogicReturn = {
   gameWords: string[] | undefined;
   gameStatus: GameStatusType;
-  usedLetters: Record<string, UsedLetterType>;
+  usedLetters: Record<string, LetterStateType>;
   numOfIncorrectGuesses: number;
   userSelectionFeedback: string;
   maxLives: number;
@@ -29,7 +29,7 @@ export const useGameLogic = ({categoryName, difficulty = DIFFICULTY.medium} : Us
     GAME_STATUS.playing
   );
   const [usedLetters, setUsedLetters] = useState<
-      Record<string, UsedLetterType>
+      Record<string, LetterStateType>
     >({});
   const [numOfIncorrectGuesses, setNumOfIncorrectGuesses] = useState<number>(0);
   const [userSelectionFeedback, setUserSelectionFeedback] =
@@ -79,7 +79,7 @@ export const useGameLogic = ({categoryName, difficulty = DIFFICULTY.medium} : Us
 
       setUsedLetters((prev) => ({
         ...prev,
-        [letter]: isCorrect ? "correct" : "incorrect",
+        [letter]: isCorrect ? LETTER_STATE.correct : LETTER_STATE.incorrect,
       }));
 
       const nextIncorrectGuess = isCorrect

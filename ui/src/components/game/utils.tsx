@@ -1,9 +1,20 @@
-import { DIFFICULTY, USER_FEEDBACK_MESSAGES } from "./constants";
-import { DifficultyType, GameStatusType, LetterTileType } from "./types";
+import {
+  DIFFICULTY,
+  GAME_STATUS,
+  LETTER_STATE,
+  LETTER_TILE_STATE,
+  USER_FEEDBACK_MESSAGES,
+} from "./constants";
+import {
+  DifficultyType,
+  GameStatusType,
+  LetterTileStateType,
+  LetterStateType,
+} from "./types";
 
 export const checkUserWon = (
   gameWords: string[],
-  usedLetters: Record<string, "correct" | "incorrect" | "default">
+  usedLetters: Record<string, LetterStateType>
 ) => {
   const uniqueChars = new Set(
     gameWords
@@ -13,7 +24,7 @@ export const checkUserWon = (
   );
 
   const guessedCorrect = Object.entries(usedLetters)
-    .filter(([, state]) => state === "correct")
+    .filter(([, state]) => state === LETTER_STATE.correct)
     .map(([char]) => char);
 
   const hasWon = [...uniqueChars].every((char) =>
@@ -40,24 +51,24 @@ export const getFeedbackMessage = (
 export const getTileString = (
   char: string,
   isSpace: boolean,
-  state: LetterTileType,
+  state: LetterTileStateType,
   gameStatus: GameStatusType
 ) => {
   if (isSpace) {
     return null;
-  } else if (state === "correct") {
+  } else if (state === LETTER_TILE_STATE.correct) {
     return char;
   } else {
-    return gameStatus === "lost" ? char : "_";
+    return gameStatus === GAME_STATUS.lost ? char : "_";
   }
 };
 
 export const getMaxLives = (difficulty: DifficultyType) => {
-  if (difficulty === DIFFICULTY.easy) {
-    return 6;
+  if (difficulty === DIFFICULTY.difficult) {
+    return 4;
   } else if (difficulty === DIFFICULTY.medium) {
     return 5;
   } else {
-    return 4;
+    return 6;
   }
 };

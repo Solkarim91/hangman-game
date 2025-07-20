@@ -14,6 +14,7 @@ import { LivesIndicator } from "./lives-indicator";
 import {
   GAME_STATUS,
   LETTER_TILE_CONTAINER_VARIANTS,
+  LETTER_TILE_STATE,
   LETTER_TILE_VARIANTS,
   USER_FEEDBACK_MESSAGES,
 } from "./constants";
@@ -162,7 +163,11 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
                           >
                             <LetterTile
                               char={char}
-                              state={usedLetters[char] ? "correct" : "default"}
+                              state={
+                                usedLetters[char]
+                                  ? LETTER_TILE_STATE.correct
+                                  : LETTER_TILE_STATE.default
+                              }
                               gameStatus={gameStatus}
                               containsLongWords={containsLongWords}
                             />
