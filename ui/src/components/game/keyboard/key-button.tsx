@@ -13,7 +13,7 @@ type KeyButtonProps = {
 export const KeyButton: FC<KeyButtonProps> = ({
   letter,
   onClick,
-  disabled = false,
+  disabled,
   state = LETTER_STATE.default,
 }) => {
   return (
