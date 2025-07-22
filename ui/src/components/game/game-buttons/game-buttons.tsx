@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { FC } from "react";
+import { newCategoryButton, playAgainButton } from "./selectors";
 
 type GameButtonsProps = {
   resetGame: () => void;
-  handleNewCategoryButtonClick: () => void;
+  handleNewCategory: () => void;
 };
 
 export const GameButtons: FC<GameButtonsProps> = ({
   resetGame,
-  handleNewCategoryButtonClick,
+  handleNewCategory,
 }) => {
   return (
     <motion.div
@@ -19,10 +20,18 @@ export const GameButtons: FC<GameButtonsProps> = ({
       className="text-4xl font-bold font-main justify-items-center"
     >
       <div className="flex flex-col items-center gap-3 *:text-2xl *:px-20 *:w-[30%]">
-        <Button variant={"outline"} onClick={resetGame}>
+        <Button
+          variant={"outline"}
+          onClick={resetGame}
+          data-testid={playAgainButton}
+        >
           {"PLAY AGAIN"}
         </Button>
-        <Button variant={"outline"} onClick={handleNewCategoryButtonClick}>
+        <Button
+          variant={"outline"}
+          onClick={handleNewCategory}
+          data-testid={newCategoryButton}
+        >
           {"NEW CATEGORY"}
         </Button>
       </div>

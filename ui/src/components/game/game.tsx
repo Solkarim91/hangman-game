@@ -29,7 +29,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
     resetGame,
   } = useGameLogic({ categoryName }); //TODO: include 'difficulty' (probably passed down as a prop in future)
   const router = useRouter();
-  const handleNewCategoryButtonClick = () => router.back();
+  const handleNewCategory = () => router.back();
 
   return (
     <>
@@ -40,7 +40,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
           <GameOutcome
             outcomeMessage={GAME_OUTCOME_MESSAGES.won}
             resetGame={resetGame}
-            handleNewCategoryButtonClick={handleNewCategoryButtonClick}
+            handleNewCategory={handleNewCategory}
           />
         )}
 
@@ -48,7 +48,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
           <GameOutcome
             outcomeMessage={GAME_OUTCOME_MESSAGES.lost}
             resetGame={resetGame}
-            handleNewCategoryButtonClick={handleNewCategoryButtonClick}
+            handleNewCategory={handleNewCategory}
           />
         )}
 

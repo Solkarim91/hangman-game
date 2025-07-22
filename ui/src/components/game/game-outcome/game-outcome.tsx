@@ -6,20 +6,20 @@ import { GameButtons } from "../game-buttons/game-buttons";
 type GameOutcomeProps = {
   outcomeMessage: OutcomeMessageType;
   resetGame: () => void;
-  handleNewCategoryButtonClick: () => void;
+  handleNewCategory: () => void;
 };
 
 export const GameOutcome: FC<GameOutcomeProps> = ({
   outcomeMessage,
   resetGame,
-  handleNewCategoryButtonClick,
+  handleNewCategory,
 }) => {
   return (
     <div className="flex flex-col gap-10 mb-10">
       <GameOutcomeMessage outcomeMessage={outcomeMessage} />
       <GameButtons
         resetGame={resetGame}
-        handleNewCategoryButtonClick={handleNewCategoryButtonClick}
+        handleNewCategory={handleNewCategory}
       />
     </div>
   );
