@@ -1,4 +1,3 @@
-import React from "react";
 import { FC } from "react";
 import { BackButton } from "./back-button";
 import { navBar } from "./selectors";

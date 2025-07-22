@@ -1,4 +1,3 @@
-import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { NavBar } from "./nav";
 import { BackButton } from "./back-button";
