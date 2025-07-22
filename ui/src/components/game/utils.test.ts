@@ -54,7 +54,7 @@ describe("checkUserLost", () => {
     Object.values(usedLetters).filter(state => state === LETTER_STATE.incorrect).length;
 
   it("returns true when all lives have been lost due to incorrect guesses", () => {
-    const maxLives = getMaxLives(DIFFICULTY.difficult)
+    const maxLives = getMaxLives(DIFFICULTY.difficult);
     const usedLetters: Record<string, LetterStateType> = {
       q: LETTER_STATE.incorrect,
       z: LETTER_STATE.incorrect,
@@ -68,7 +68,7 @@ describe("checkUserLost", () => {
   });
 
   it("returns false when user still has lives remaining", () => {
-    const maxLives = getMaxLives(DIFFICULTY.difficult)
+    const maxLives = getMaxLives(DIFFICULTY.difficult);
     const usedLetters: Record<string, LetterStateType> = {
       q: LETTER_STATE.incorrect,
       z: LETTER_STATE.incorrect,
@@ -89,7 +89,7 @@ describe("getFeedbackMessage", () => {
 
   const getFeedbackMessageArgs = (letterGuessed: string, nextIncorrectGuess: number): [boolean, number, number] => {
     const isCorrect = checkIfLetterCorrect(letterGuessed);
-    const maxLives = getMaxLives(DIFFICULTY.difficult)
+    const maxLives = getMaxLives(DIFFICULTY.difficult);
 
     return [isCorrect, nextIncorrectGuess, maxLives];
   };
