@@ -1,44 +1,42 @@
-import { DifficultyType, GameStatusType, LetterStateType, LetterTileStateType, OutcomeMessageType, UserSelectionFeedbackType } from "./types";
-
 export const QWERTY_LAYOUT: string[][] = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
   ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
   ["Z", "X", "C", "V", "B", "N", "M"],
 ];
 
-export const DIFFICULTY: Record<string, DifficultyType> = {
+export const DIFFICULTY = {
   easy: "easy",
   medium: "medium",
   difficult: "difficult",
-};
+} as const;
 
-export const LETTER_STATE: Record<string, LetterStateType> = {
+export const LETTER_STATE = {
   correct: "correct",
   incorrect: "incorrect",
   default: "default",
-};
+} as const;
 
-export const LETTER_TILE_STATE: Record<string, LetterTileStateType> = {
+export const LETTER_TILE_STATE = {
   correct: "correct",
   default: "default",
-};
+} as const;
 
-export const USER_FEEDBACK_MESSAGES: Record<string, UserSelectionFeedbackType> = {
+export const USER_FEEDBACK_MESSAGES = {
   correct: "Nice! ✅",
   incorrect: "Try again ❌",
   lastChance: "Last chance!! 💀"
-};
+} as const;
 
-export const GAME_OUTCOME_MESSAGES: Record<string, OutcomeMessageType> = {
+export const GAME_OUTCOME_MESSAGES = {
   won: "🎉 YOU WON!!! 🎉",
   lost: "💀 YOU LOST 💀",
-};
+} as const;
 
-export const GAME_STATUS: Record<string, GameStatusType> = {
+export const GAME_STATUS = {
   playing: "playing",
   won: "won",
   lost: "lost"
-};
+} as const;
 
 export const LETTER_TILE_CONTAINER_VARIANTS = {
   hidden: { y: 0 },
