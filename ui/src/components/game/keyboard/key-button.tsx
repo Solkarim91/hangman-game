@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { FC } from "react";
-import { KeyButtonType } from "./types";
-import { LETTER_STATE } from "./constants";
+import { KeyButtonType } from "../types";
+import { LETTER_STATE } from "../constants";
 
 type KeyButtonProps = {
   letter: string;

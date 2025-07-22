@@ -4,8 +4,8 @@ import { Heart } from "lucide-react";
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { LIFE_ICON_CONTAINER_VARIANTS, LIFE_ICON_VARIANTS } from "./constants";
-import { GameStatusType } from "./types";
+import { LIFE_ICON_CONTAINER_VARIANTS, LIFE_ICON_VARIANTS } from "../constants";
+import { GameStatusType } from "../types";
 
 type LivesIndicatorProps = {
   maxLives: number;

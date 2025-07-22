@@ -1,4 +1,4 @@
-import { DifficultyType, GameStatusType, LetterStateType, LetterTileStateType, UserSelectionFeedbackType } from "./types";
+import { DifficultyType, GameStatusType, LetterStateType, LetterTileStateType, OutcomeMessageType, UserSelectionFeedbackType } from "./types";
 
 export const QWERTY_LAYOUT: string[][] = [
   ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -27,6 +27,11 @@ export const USER_FEEDBACK_MESSAGES: Record<string, UserSelectionFeedbackType> =
   correct: "Nice! ✅",
   incorrect: "Try again ❌",
   lastChance: "Last chance!! 💀"
+};
+
+export const GAME_OUTCOME_MESSAGES: Record<string, OutcomeMessageType> = {
+  won: "🎉 YOU WON!!! 🎉",
+  lost: "💀 YOU LOST 💀",
 };
 
 export const GAME_STATUS: Record<string, GameStatusType> = {

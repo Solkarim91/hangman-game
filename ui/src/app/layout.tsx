@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${caveatBrushFont.variable}`}>
         <div className="absolute inset-0">
-          <div className="absolute inset-0 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#33b3ee_100%)]">
+          <div className="absolute inset-0 h-[100vh] w-[100vw] bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#33b3ee_100%)]">
             {children}
           </div>
         </div>

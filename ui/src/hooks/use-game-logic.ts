@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import confetti from "canvas-confetti";
 import { DIFFICULTY, GAME_STATUS, LETTER_STATE } from "@/components/game/constants";
 import { checkUserLost, checkUserWon, getFeedbackMessage, getMaxLives } from "@/components/game/utils";
-import { DifficultyType, GameStatusType, LetterStateType } from "@/components/game/types";
+import { DifficultyType, GameStatusType, LetterStateType, UserSelectionFeedbackType } from "@/components/game/types";
 import { categoryWords } from "@/lib/category-words";
 import { formatGamePhrase, getRandomInt } from "@/lib/utils";
 
@@ -16,7 +16,7 @@ type UseGameLogicReturn = {
   gameStatus: GameStatusType;
   usedLetters: Record<string, LetterStateType>;
   numOfIncorrectGuesses: number;
-  userSelectionFeedback: string;
+  userSelectionFeedback: UserSelectionFeedbackType;
   maxLives: number;
   isGameStarted: boolean;
   handleKeyClick: (letter: string) => void;
@@ -33,7 +33,7 @@ export const useGameLogic = ({categoryName, difficulty = DIFFICULTY.medium} : Us
     >({});
   const [numOfIncorrectGuesses, setNumOfIncorrectGuesses] = useState<number>(0);
   const [userSelectionFeedback, setUserSelectionFeedback] =
-    useState<string>("");
+    useState<UserSelectionFeedbackType>("");
     const maxLives = getMaxLives(difficulty);
 
   const isGameStarted = useMemo(

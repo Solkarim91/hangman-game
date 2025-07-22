@@ -10,6 +10,7 @@ import {
   GameStatusType,
   LetterTileStateType,
   LetterStateType,
+  UserSelectionFeedbackType,
 } from "./types";
 
 export const checkUserWon = (
@@ -41,7 +42,7 @@ export const getFeedbackMessage = (
   isCorrect: boolean,
   nextIncorrectGuess: number,
   maxLives: number
-): string => {
+): UserSelectionFeedbackType => {
   if (isCorrect) return USER_FEEDBACK_MESSAGES.correct;
   if (nextIncorrectGuess === maxLives - 1)
     return USER_FEEDBACK_MESSAGES.lastChance;
