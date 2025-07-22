@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { LetterTile } from "./letter-tile";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { letterTilesContainer } from "./selectors";
 
 type LetterTilesProps = {
   gameWords: string[];
@@ -48,6 +49,7 @@ export const LetterTiles: FC<LetterTilesProps> = ({
             <div
               key={`word-${wordIndex}`}
               className={cn("flex", useCondensedSpacing ? "gap-1" : "gap-2")}
+              data-testid={letterTilesContainer}
             >
               {word.split("").map((char, charIndex) => (
                 <motion.div
