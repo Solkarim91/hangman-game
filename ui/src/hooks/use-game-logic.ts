@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
 import confetti from "canvas-confetti";
-import { DIFFICULTY, GAME_STATUS, LETTER_STATE } from "@/components/game/constants";
+import { DIFFICULTY, GAME_STATUS, LETTER_STATE, USER_FEEDBACK_MESSAGES } from "@/components/game/constants";
 import { checkUserLost, checkUserWon, getFeedbackMessage, getMaxLives } from "@/components/game/utils";
 import { DifficultyType, GameStatusType, LetterStateType, UserSelectionFeedbackType } from "@/components/game/types";
 import { categoryWords } from "@/lib/category-words";
@@ -33,7 +33,7 @@ export const useGameLogic = ({categoryName, difficulty = DIFFICULTY.medium} : Us
     >({});
   const [numOfIncorrectGuesses, setNumOfIncorrectGuesses] = useState<number>(0);
   const [userSelectionFeedback, setUserSelectionFeedback] =
-    useState<UserSelectionFeedbackType>("");
+    useState<UserSelectionFeedbackType>(USER_FEEDBACK_MESSAGES.none);
     const maxLives = getMaxLives(difficulty);
 
   const isGameStarted = useMemo(
@@ -103,7 +103,7 @@ export const useGameLogic = ({categoryName, difficulty = DIFFICULTY.medium} : Us
   const resetGame = useCallback(() => {
     setUsedLetters({});
     setNumOfIncorrectGuesses(0);
-    setUserSelectionFeedback("");
+    setUserSelectionFeedback(USER_FEEDBACK_MESSAGES.none);
     setGameStatus(GAME_STATUS.playing);
     getNewGameWords();
   }, [getNewGameWords]);

@@ -22,6 +22,7 @@ export const LETTER_TILE_STATE = {
 } as const;
 
 export const USER_FEEDBACK_MESSAGES = {
+  none: "",
   correct: "Nice! ✅",
   incorrect: "Try again ❌",
   lastChance: "Last chance!! 💀"
