@@ -5,17 +5,21 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../ui/carousel";
-import { Category } from "@/app/constants";
-import { Dispatch, SetStateAction } from "react";
+} from "../ui/carousel/carousel";
+import { Dispatch, FC, SetStateAction } from "react";
+import { Category } from "./types";
 
-export function verticalCarousel(
-  carouselItems: readonly Category[],
-  selectedCategory: Category | undefined,
-  setSelectedCategory: Dispatch<
-    SetStateAction<"Countries" | "Phrases" | "Movies" | undefined>
-  >
-) {
+type CategoryCarouselProps = {
+  carouselItems: readonly Category[];
+  selectedCategory: Category | undefined;
+  setSelectedCategory: Dispatch<SetStateAction<Category | undefined>>;
+};
+
+export const CategoryCarousel: FC<CategoryCarouselProps> = ({
+  carouselItems,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   return (
     <Carousel
       opts={{
@@ -52,4 +56,4 @@ export function verticalCarousel(
       <CarouselNext />
     </Carousel>
   );
-}
+};

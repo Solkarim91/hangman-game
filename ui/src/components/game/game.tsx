@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { Keyboard } from "./keyboard/keyboard";
-import Loading from "@/components/ui/loading/loading";
+import Loading from "@/components/ui/loading";
 import { useRouter } from "next/navigation";
 import { LivesIndicator } from "./lives-indicator/lives-indicator";
 import { GAME_OUTCOME_MESSAGES, GAME_STATUS } from "./constants";

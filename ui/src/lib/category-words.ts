@@ -1,5 +1,5 @@
-export const categoryWords: Record<string, string[]> = {
-  "countries": [
+export const CATEGORY_WORDS: Record<string, string[]> = {
+  "Countries": [
     "Afghanistan",
     "Albania",
     "Algeria",
@@ -195,7 +195,7 @@ export const categoryWords: Record<string, string[]> = {
     "Zambia",
     "Zimbabwe"
   ],
-  "phrases": [
+  "Phrases": [
     "Better late than never",
     "No pain no gain",
     "Under the weather",
@@ -232,7 +232,7 @@ export const categoryWords: Record<string, string[]> = {
     "In hot water",
     "Out of the blue"
   ],
-  "movies": [
+  "Movies": [
     "The Greatest Showman",
     "The Lord Of The Rings",
     "Trainspotting",
@@ -266,4 +266,4 @@ export const categoryWords: Record<string, string[]> = {
     "The Grand Budapest Hotel",
     "Titanic"
   ]
-};
+} as const;

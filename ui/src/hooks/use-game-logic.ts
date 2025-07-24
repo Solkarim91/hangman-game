@@ -3,11 +3,12 @@ import confetti from "canvas-confetti";
 import { DIFFICULTY, GAME_STATUS, LETTER_STATE, USER_FEEDBACK_MESSAGES } from "@/components/game/constants";
 import { checkUserLost, checkUserWon, getFeedbackMessage, getMaxLives } from "@/components/game/utils";
 import { DifficultyType, GameStatusType, LetterStateType, UserSelectionFeedbackType } from "@/components/game/types";
-import { categoryWords } from "@/lib/category-words";
-import { formatGamePhrase, getRandomInt } from "@/lib/utils";
+import { CATEGORY_WORDS } from "@/lib/category-words";
+import { capitalizeCategoryFirstLetter, formatGamePhrase, getRandomInt } from "@/lib/utils";
+import { Category } from "@/components/category-carousel/types";
 
 type UseGameLogicProps = {
-  categoryName: string;
+  categoryName: Category;
   difficulty?: DifficultyType;
 };
 
@@ -42,7 +43,7 @@ export const useGameLogic = ({categoryName, difficulty = DIFFICULTY.medium} : Us
   );
 
   const getNewGameWords = useCallback(() => {
-    const words = categoryWords[categoryName];
+    const words = CATEGORY_WORDS[capitalizeCategoryFirstLetter(categoryName)];
     const gameWord = words[getRandomInt(words.length)].toUpperCase();
     setGameWords(formatGamePhrase(gameWord));
   }, [categoryName]);
