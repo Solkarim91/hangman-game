@@ -1,16 +1,18 @@
 "use client";
 
 import { Logo } from "@/components/ui/logo";
-import { Category, CATEGORY_TITLES } from "./constants";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
-import { verticalCarousel } from "@/components/carousel/carousel";
+import { CategoryCarousel } from "@/components/category-carousel/category-carousel";
+import { Category } from "@/components/category-carousel/types";
+import { CATEGORY_WORDS } from "@/lib/category-words";
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<
     Category | undefined
   >(undefined);
+  const carouselItems = Object.keys(CATEGORY_WORDS);
 
   const router = useRouter();
 
@@ -28,11 +30,11 @@ export default function Home() {
           {"To get started, pick a category below and then hit 'PLAY'!"}
         </p>
 
-        {verticalCarousel(
-          CATEGORY_TITLES,
-          selectedCategory,
-          setSelectedCategory
-        )}
+        <CategoryCarousel
+          carouselItems={carouselItems}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
 
         <Button
           className="font-main text-3xl"

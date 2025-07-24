@@ -4,8 +4,9 @@ import { Heart } from "lucide-react";
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { LIFE_ICON_CONTAINER_VARIANTS, LIFE_ICON_VARIANTS } from "./constants";
-import { GameStatusType } from "./types";
+import { LIFE_ICON_CONTAINER_VARIANTS, LIFE_ICON_VARIANTS } from "../constants";
+import { GameStatusType } from "../types";
+import { heartIcon, lifeIcon } from "./selectors";
 
 type LivesIndicatorProps = {
   maxLives: number;
@@ -35,6 +36,7 @@ export const LivesIndicator: FC<LivesIndicatorProps> = ({
           <motion.div
             key={`life-${i}`}
             variants={LIFE_ICON_VARIANTS}
+            data-testid={lifeIcon}
             animate={
               justLost
                 ? {
@@ -55,6 +57,7 @@ export const LivesIndicator: FC<LivesIndicatorProps> = ({
               stroke="black"
               strokeWidth={1}
               className={cn("transition-all")}
+              data-testid={heartIcon}
             />
           </motion.div>
         );

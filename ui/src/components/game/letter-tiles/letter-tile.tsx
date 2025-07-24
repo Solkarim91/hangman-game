@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 import { FC } from "react";
-import { GameStatusType, LetterTileStateType } from "./types";
-import { getTileString } from "./utils";
-import { LETTER_TILE_STATE } from "./constants";
+import { GameStatusType, LetterTileStateType } from "../types";
+import { getTileString } from "../utils";
+import { LETTER_TILE_STATE } from "../constants";
 
 type LetterTileProps = {
   char: string;

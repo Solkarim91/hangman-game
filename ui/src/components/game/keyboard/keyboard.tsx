@@ -2,8 +2,8 @@
 
 import React, { FC } from "react";
 import { KeyButton } from "./key-button";
-import { LETTER_STATE, QWERTY_LAYOUT } from "./constants";
-import { LetterStateType } from "./types";
+import { LETTER_STATE, QWERTY_LAYOUT } from "../constants";
+import { LetterStateType } from "../types";
 
 type KeyboardProps = {
   onKeyClick: (letter: string) => void;

@@ -12,3 +12,7 @@ export function getRandomInt(max: number) {
 export function formatGamePhrase(phrase: string) {
   return phrase.toUpperCase().replace("-", " ").split(" ");
 };
+
+export function capitalizeCategoryFirstLetter(category: string) {
+  return category.charAt(0).toUpperCase() + category.slice(1);
+}
