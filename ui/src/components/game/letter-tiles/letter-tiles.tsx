@@ -27,12 +27,19 @@ export const LetterTiles: FC<LetterTilesProps> = ({
     [gameWords]
   );
 
+  const totalCharactersExceedsThreshold = useMemo(
+    () => Boolean((gameWords?.reduce((sum, word) => sum + word.length, 0) ?? 0) >= 16),
+    [gameWords]
+  );
+
   const isMobile = useIsMobile();
 
-  const useCondensedSpacing = useMemo(
-    () => containsLongWords && isMobile,
-    [containsLongWords, isMobile]
-  );
+  const useCondensedSpacing = useMemo(() => {
+    return (
+      isMobile &&
+      (containsLongWords || totalCharactersExceedsThreshold)
+    );
+  }, [isMobile, containsLongWords, totalCharactersExceedsThreshold]);
 
   return (
     <div className="flex flex-wrap gap-x-12 gap-y-4 max-w-[100vw] justify-center">
@@ -65,6 +72,7 @@ export const LetterTiles: FC<LetterTilesProps> = ({
                     }
                     gameStatus={gameStatus}
                     containsLongWords={containsLongWords}
+                    totalCharactersExceedsThreshold={totalCharactersExceedsThreshold}
                   />
                 </motion.div>
               ))}

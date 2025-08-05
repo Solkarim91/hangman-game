@@ -63,7 +63,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
             )}
 
             <div
-              className={`text-center flex flex-col h-full ${gameStatus === GAME_STATUS.playing ? "mt-10" : ""} ${isGameStarted ? "" : "justify-between"}`}
+              className={`text-center flex flex-col h-full ${gameStatus === GAME_STATUS.playing ? "mt-8" : ""} ${isGameStarted ? "" : "justify-between"}`}
             >
               <LetterTiles
                 gameWords={gameWords}
@@ -73,7 +73,6 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
 
               {gameStatus === GAME_STATUS.playing && (
                 <UserFeedback
-                  isGameStarted={isGameStarted}
                   userSelectionFeedback={userSelectionFeedback}
                 />
               )}
@@ -85,7 +84,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
       </div>
       <div>
         {gameStatus === GAME_STATUS.playing && (
-          <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} />
+          <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} isGameStarted={isGameStarted} />
         )}
       </div>
     </>

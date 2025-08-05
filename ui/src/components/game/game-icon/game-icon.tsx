@@ -10,7 +10,7 @@ type GameIconProps = {
 
 export const GameIcon: FC<GameIconProps> = ({ gameStatus }) => {
   return (
-    <div className="mb-10">
+    <div className="mb-8">
       <motion.div
         key={gameStatus}
         initial={{ opacity: 0, scale: 0.8 }}
