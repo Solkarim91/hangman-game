@@ -23,9 +23,9 @@ export default function Home() {
   }, [selectedCategory, router]);
 
   return (
-    <div className="mt-20 flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-10 pt-8 h-[100vh]">
       <Logo />
-      <div className="items-center flex flex-col gap-26">
+      <div className="items-center flex flex-col gap-20">
         <p className="font-main max-w-[75%] text-center text-2xl">
           {"To get started, pick a category below and then hit 'PLAY'!"}
         </p>
@@ -37,7 +37,7 @@ export default function Home() {
         />
 
         <Button
-          className="font-main text-3xl"
+          className="font-main text-3xl p-6"
           variant={"outline"}
           disabled={!selectedCategory}
           onClick={handlePlayClick}
