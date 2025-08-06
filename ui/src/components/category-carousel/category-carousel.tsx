@@ -61,7 +61,7 @@ export const CategoryCarousel: FC<CategoryCarouselProps> = ({
         {carouselItems.map((itemTitle, index) => (
           <CarouselItem
             key={index}
-            className="pt-1 basis-1/2"
+            className="pt-1 basis-1/2 cursor-pointer"
             onClick={() => handleItemClick(index)}
           >
             <div className="p-1">
@@ -80,8 +80,8 @@ export const CategoryCarousel: FC<CategoryCarouselProps> = ({
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="cursor-pointer hover:scale-105"/>
+      <CarouselNext className="cursor-pointer hover:scale-105"/>
     </Carousel>
   );
 };

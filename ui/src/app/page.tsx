@@ -48,7 +48,7 @@ export default function Home() {
         />
 
         <Button
-          className="font-main text-3xl p-6"
+          className="font-main text-3xl p-6 cursor-pointer hover:scale-105"
           variant={"outline"}
           disabled={!selectedCategory}
           onClick={handlePlayClick}
