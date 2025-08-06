@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { Keyboard } from "./keyboard/keyboard";
-import Loading from "@/components/ui/loading";
+import { Loading } from "@/components/ui/loading";
 import { useRouter } from "next/navigation";
 import { LivesIndicator } from "./lives-indicator/lives-indicator";
 import { GAME_OUTCOME_MESSAGES, GAME_STATUS } from "./constants";
@@ -30,6 +30,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
   } = useGameLogic({ categoryName }); //TODO: include 'difficulty' (probably passed down as a prop in future)
   const router = useRouter();
   const handleNewCategory = () => router.back();
+  const isLoading = Boolean(!gameWords);
 
   return (
     <>
@@ -63,7 +64,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
             )}
 
             <div
-              className={`text-center flex flex-col h-full ${gameStatus === GAME_STATUS.playing ? "mt-10" : ""} ${isGameStarted ? "" : "justify-between"}`}
+              className={`text-center flex flex-col h-full ${gameStatus === GAME_STATUS.playing ? "mt-8" : ""} ${isGameStarted ? "" : "justify-between"}`}
             >
               <LetterTiles
                 gameWords={gameWords}
@@ -73,7 +74,6 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
 
               {gameStatus === GAME_STATUS.playing && (
                 <UserFeedback
-                  isGameStarted={isGameStarted}
                   userSelectionFeedback={userSelectionFeedback}
                 />
               )}
@@ -84,8 +84,8 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
         )}
       </div>
       <div>
-        {gameStatus === GAME_STATUS.playing && (
-          <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} />
+        {!isLoading && gameStatus === GAME_STATUS.playing && (
+          <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} isGameStarted={isGameStarted} />
         )}
       </div>
     </>

@@ -21,7 +21,7 @@ export const KeyButton: FC<KeyButtonProps> = ({
       onClick={() => onClick(letter)}
       disabled={disabled}
       className={cn(
-        "rounded-md w-8.5 h-10 sm:w-12 sm:h-12",
+        "rounded-md w-8.5 h-10 sm:w-12 sm:h-12 cursor-pointer",
         "flex items-center justify-center font-main shadow text-2xl",
         "transition-colors duration-200 ease-in-out",
         {

@@ -1,12 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel/carousel";
-import { Dispatch, FC, SetStateAction } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Category } from "./types";
 
 type CategoryCarouselProps = {
@@ -20,21 +21,48 @@ export const CategoryCarousel: FC<CategoryCarouselProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    const onSelect = (api: CarouselApi) => {
+      if (api) {
+        const index = api.selectedScrollSnap();
+        setSelectedCategory(carouselItems[index]);
+      };
+    };
+    
+    onSelect(carouselApi);
+
+    carouselApi.on("select", () => onSelect(carouselApi));
+    return () => {
+      carouselApi.off("select", () => onSelect(carouselApi));
+    };
+  }, [carouselApi, carouselItems, setSelectedCategory]);
+
+  const handleItemClick = (index: number) => {
+    if (!carouselApi) return;
+    carouselApi.scrollTo(index);
+  };
+
   return (
     <Carousel
       opts={{
         align: "center",
         loop: true,
+        axis: "y",
       }}
       orientation="vertical"
       className="w-[80%] max-w-xs"
+      setApi={setCarouselApi}
     >
       <CarouselContent className="-mt-1 h-[200px] font-main">
         {carouselItems.map((itemTitle, index) => (
           <CarouselItem
             key={index}
-            className="pt-1 basis-1/2"
-            onClick={() => setSelectedCategory(itemTitle)}
+            className="pt-1 basis-1/2 cursor-pointer"
+            onClick={() => handleItemClick(index)}
           >
             <div className="p-1">
               <Card
@@ -52,8 +80,8 @@ export const CategoryCarousel: FC<CategoryCarouselProps> = ({
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="cursor-pointer hover:scale-105"/>
+      <CarouselNext className="cursor-pointer hover:scale-105"/>
     </Carousel>
   );
 };
