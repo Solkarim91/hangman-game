@@ -4,19 +4,6 @@ import { UserFeedback } from "./user-feedback";
 import { getFeedbackMessage } from "../utils";
 
 describe("UserFeedback", () => {
-  it("displays initial prompt when game has not started", () => {
-    render(
-      <UserFeedback
-        isGameStarted={false}
-        userSelectionFeedback={USER_FEEDBACK_MESSAGES.none}
-      />
-    );
-
-    expect(
-      screen.getByText(/choose a letter below to get started/i)
-    ).toBeInTheDocument();
-  });
-
   it("displays incorrect feedback message when user guesses an incorrect letter", () => {
     const isCorrect = false;
     const nextIncorrectGuess = 0;
@@ -29,7 +16,7 @@ describe("UserFeedback", () => {
     );
 
     render(
-      <UserFeedback isGameStarted={true} userSelectionFeedback={feedback} />
+      <UserFeedback userSelectionFeedback={feedback} />
     );
 
     expect(
@@ -49,7 +36,7 @@ describe("UserFeedback", () => {
     );
 
     render(
-      <UserFeedback isGameStarted={true} userSelectionFeedback={feedback} />
+      <UserFeedback userSelectionFeedback={feedback} />
     );
 
     expect(
@@ -60,7 +47,6 @@ describe("UserFeedback", () => {
   it("renders no feedback message if game has started but user has not guessed any letters", () => {
     const { container } = render(
       <UserFeedback
-        isGameStarted={true}
         userSelectionFeedback={USER_FEEDBACK_MESSAGES.none}
       />
     );
@@ -80,7 +66,7 @@ describe("UserFeedback", () => {
     );
 
     render(
-      <UserFeedback isGameStarted={true} userSelectionFeedback={feedback} />
+      <UserFeedback userSelectionFeedback={feedback} />
     );
 
     const message = screen.getByText(USER_FEEDBACK_MESSAGES.lastChance);
