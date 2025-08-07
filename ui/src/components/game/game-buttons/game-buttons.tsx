@@ -19,7 +19,7 @@ export const GameButtons: FC<GameButtonsProps> = ({
       transition={{ delay: 1, duration: 0.5, ease: "easeOut" }}
       className="text-4xl font-bold font-main justify-items-center"
     >
-      <div className="flex flex-col items-center gap-3 *:text-2xl *:px-20 *:w-[30%]">
+      <div className="flex flex-col items-center gap-3 *:text-2xl *:px-20 *:w-[30%] *:hover:cursor-pointer *:hover:scale-102">
         <Button
           variant={"outline"}
           onClick={resetGame}
