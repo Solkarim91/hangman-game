@@ -11,20 +11,32 @@ describe("KeyButton", () => {
   const letterE = "E";
 
   it("renders the button with correct letter", () => {
-    render(<KeyButton letter={letterA} onClick={handleClick} />);
+    render(
+      <KeyButton
+        letter={letterA}
+        onClick={handleClick}
+        isMobile={false}
+      />
+    );
     expect(
       screen.getByRole("button", { name: /letter a/i })
     ).toBeInTheDocument();
   });
 
   it("calls onClick with the letter when clicked", () => {
-    render(<KeyButton letter={letterB} onClick={handleClick} />);
+    render(<KeyButton letter={letterB} onClick={handleClick} isMobile={false} />);
     fireEvent.click(screen.getByRole("button", { name: /letter b/i }));
     expect(handleClick).toHaveBeenCalledWith(letterB);
   });
 
   it("disables the button when `disabled` is true", () => {
-    render(<KeyButton letter={letterC} onClick={handleClick} disabled />);
+    render(
+      <KeyButton
+        letter={letterC}
+        onClick={handleClick}
+        disabled
+        isMobile={false}
+      />);
     expect(screen.getByRole("button", { name: /letter c/i })).toBeDisabled();
   });
 
@@ -34,6 +46,7 @@ describe("KeyButton", () => {
         letter={letterD}
         onClick={handleClick}
         state={LETTER_STATE.correct}
+        isMobile={false}
       />
     );
     expect(container.firstChild).toHaveClass("bg-green-500");
@@ -45,6 +58,7 @@ describe("KeyButton", () => {
         letter={letterE}
         onClick={handleClick}
         state={LETTER_STATE.incorrect}
+        isMobile={false}
       />
     );
     expect(container.firstChild).toHaveClass("bg-red-500");

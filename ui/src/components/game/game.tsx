@@ -11,6 +11,8 @@ import { LetterTiles } from "./letter-tiles/letter-tiles";
 import { GameOutcome } from "./game-outcome/game-outcome";
 import { UserFeedback } from "./user-feedback/user-feedback";
 import { GameIcon } from "./game-icon/game-icon";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 type GameProps = {
   categoryName: string;
@@ -31,10 +33,13 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
   const router = useRouter();
   const handleNewCategory = () => router.back();
   const isLoading = Boolean(!gameWords);
+  const isMobile = useIsMobile();
 
   return (
     <>
-      <div className="p-10 w-[100%] h-[70vh] flex flex-col justify-between sm:mt-0 relative">
+      <div className={cn("p-10 w-[100%] h-[70vh] flex flex-col justify-between sm:mt-0 relative", {
+        "p-6": isMobile
+      })}>
         <GameIcon gameStatus={gameStatus} />
 
         {gameStatus === GAME_STATUS.won && (
@@ -42,6 +47,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
             outcomeMessage={GAME_OUTCOME_MESSAGES.won}
             resetGame={resetGame}
             handleNewCategory={handleNewCategory}
+            isMobile={isMobile}
           />
         )}
 
@@ -50,6 +56,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
             outcomeMessage={GAME_OUTCOME_MESSAGES.lost}
             resetGame={resetGame}
             handleNewCategory={handleNewCategory}
+            isMobile={isMobile}
           />
         )}
 
@@ -60,16 +67,18 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
                 maxLives={maxLives}
                 numOfIncorrectGuesses={numOfIncorrectGuesses}
                 gameStatus={gameStatus}
+                isMobile={isMobile}
               />
             )}
 
             <div
-              className={`text-center flex flex-col h-full ${gameStatus === GAME_STATUS.playing ? "mt-8" : ""} ${isGameStarted ? "" : "justify-between"}`}
+              className={`text-center flex flex-col h-full max-w-[900px] self-center ${isGameStarted ? "" : "justify-between"}`}
             >
               <LetterTiles
                 gameWords={gameWords}
                 gameStatus={gameStatus}
                 usedLetters={usedLetters}
+                isMobile={isMobile}
               />
 
               {gameStatus === GAME_STATUS.playing && (
@@ -85,7 +94,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
       </div>
       <div>
         {!isLoading && gameStatus === GAME_STATUS.playing && (
-          <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} isGameStarted={isGameStarted} />
+          <Keyboard onKeyClick={handleKeyClick} usedLetters={usedLetters} isGameStarted={isGameStarted} isMobile={isMobile} />
         )}
       </div>
     </>

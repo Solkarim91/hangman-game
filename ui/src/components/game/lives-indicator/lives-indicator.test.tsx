@@ -10,6 +10,7 @@ describe("LivesIndicator", () => {
         maxLives={5}
         numOfIncorrectGuesses={0}
         gameStatus={GAME_STATUS.playing}
+        isMobile={false}
       />
     );
     expect(screen.getAllByTestId(lifeIcon)).toHaveLength(5);
@@ -21,6 +22,7 @@ describe("LivesIndicator", () => {
         maxLives={3}
         numOfIncorrectGuesses={0}
         gameStatus={GAME_STATUS.playing}
+        isMobile={false}
       />
     );
     const hearts = screen.getAllByTestId(heartIcon);
@@ -35,6 +37,7 @@ describe("LivesIndicator", () => {
         maxLives={5}
         numOfIncorrectGuesses={2}
         gameStatus={GAME_STATUS.playing}
+        isMobile={false}
       />
     );
     const hearts = screen.getAllByTestId(heartIcon);

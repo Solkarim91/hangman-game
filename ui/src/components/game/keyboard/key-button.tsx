@@ -8,6 +8,7 @@ type KeyButtonProps = {
   onClick: (letter: string) => void;
   disabled?: boolean;
   state?: KeyButtonType;
+  isMobile: boolean;
 };
 
 export const KeyButton: FC<KeyButtonProps> = ({
@@ -15,6 +16,7 @@ export const KeyButton: FC<KeyButtonProps> = ({
   onClick,
   disabled,
   state = LETTER_STATE.default,
+  isMobile
 }) => {
   return (
     <button
@@ -32,6 +34,7 @@ export const KeyButton: FC<KeyButtonProps> = ({
           "bg-red-500 text-white border border-black":
             state === LETTER_STATE.incorrect,
           "opacity-75 cursor-not-allowed": disabled,
+          "w-8": isMobile,
         }
       )}
       aria-label={`Letter ${letter}`}

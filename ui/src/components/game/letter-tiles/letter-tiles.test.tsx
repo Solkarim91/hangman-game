@@ -1,8 +1,3 @@
-jest.mock("@/hooks/use-mobile", () => ({
-  useIsMobile: jest.fn(),
-}));
-
-import { useIsMobile } from "@/hooks/use-mobile";
 import { render, screen } from "@testing-library/react";
 import { LetterTiles } from "./letter-tiles";
 import { letterTilesContainer } from "./selectors";
@@ -12,7 +7,12 @@ describe("LetterTiles", () => {
 
   it("should render the correct number of tiles for the game phrase", () => {
     render(
-      <LetterTiles gameWords={words} gameStatus="playing" usedLetters={{}} />
+      <LetterTiles
+        gameWords={words}
+        gameStatus="playing"
+        usedLetters={{}}
+        isMobile={false}
+      />
     );
 
     const letterCount = words.join("").split("").length;
@@ -25,6 +25,7 @@ describe("LetterTiles", () => {
         gameWords={words}
         gameStatus="playing"
         usedLetters={{ H: "correct", E: "correct" }}
+        isMobile={false}
       />
     );
 
@@ -34,13 +35,12 @@ describe("LetterTiles", () => {
   });
 
   it("should apply condensed spacing if the game phrase contains a long word & is being viewed on a small device", () => {
-    (useIsMobile as jest.Mock).mockReturnValue(true);
-
     render(
       <LetterTiles
         gameWords={["LONGWORD"]}
         gameStatus="playing"
         usedLetters={{}}
+        isMobile={true}
       />
     );
 

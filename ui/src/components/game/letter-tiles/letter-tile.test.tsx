@@ -12,6 +12,8 @@ describe("LetterTile", () => {
         state={LETTER_TILE_STATE.default}
         containsLongWords={false}
         gameStatus={GAME_STATUS.playing}
+        isMobile={false}
+        totalCharactersExceedsThreshold={false}
       />
     );
     expect(screen.getByLabelText("Character '_'")).toBeVisible();
@@ -24,6 +26,8 @@ describe("LetterTile", () => {
         state={LETTER_TILE_STATE.correct}
         containsLongWords={false}
         gameStatus={GAME_STATUS.playing}
+        totalCharactersExceedsThreshold={false}
+        isMobile={false}
       />
     );
     expect(screen.getByLabelText(`Character '${letter}'`)).toBeVisible();
@@ -39,6 +43,8 @@ describe("LetterTile", () => {
         state={LETTER_TILE_STATE.default}
         containsLongWords={false}
         gameStatus="playing"
+        totalCharactersExceedsThreshold={false}
+        isMobile={false}
       />
     );
     expect(screen.getByLabelText("Space")).toHaveClass("invisible");
@@ -50,7 +56,9 @@ describe("LetterTile", () => {
         char={letter}
         state={LETTER_TILE_STATE.default}
         containsLongWords={true}
+        totalCharactersExceedsThreshold={true}
         gameStatus="playing"
+        isMobile={false}
       />
     );
     expect(container.firstChild).toHaveClass("w-8");

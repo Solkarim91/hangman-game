@@ -9,15 +9,17 @@ type KeyboardProps = {
   onKeyClick: (letter: string) => void;
   usedLetters?: Record<string, LetterStateType>;
   isGameStarted: boolean;
+  isMobile: boolean;
 };
 
 export const Keyboard: FC<KeyboardProps> = ({
   onKeyClick,
   usedLetters = {},
-  isGameStarted
+  isGameStarted,
+  isMobile
 }) => {
   return (
-    <div className="absolute left-0 right-0 bottom-7.5">
+    <div className="absolute left-0 right-0 bottom-7.5 md:bottom-20">
       {!isGameStarted && (
         <div className="flex justify-center">
           <p className="font-main text-2xl">
@@ -38,6 +40,7 @@ export const Keyboard: FC<KeyboardProps> = ({
                   usedLetters[letter] !== LETTER_STATE.default
                 }
                 state={usedLetters[letter] || LETTER_STATE.default}
+                isMobile={isMobile}
               />
             ))}
           </div>

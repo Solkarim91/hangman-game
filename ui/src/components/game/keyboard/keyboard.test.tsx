@@ -4,7 +4,7 @@ import { Keyboard } from "./keyboard";
 
 describe("Keyboard", () => {
   it("displays initial prompt when game has not started", () => {
-      render(<Keyboard isGameStarted={false} onKeyClick={() => {}} />);
+      render(<Keyboard isGameStarted={false} onKeyClick={() => {}} isMobile={false}/>);
   
       expect(
         screen.getByText(/choose a letter below to get started/i)
@@ -12,7 +12,7 @@ describe("Keyboard", () => {
     });
 
   it("renders all keys from QWERTY layout", () => {
-    render(<Keyboard isGameStarted={false} onKeyClick={() => {}} />);
+    render(<Keyboard isGameStarted={false} onKeyClick={() => {}} isMobile={false}/>);
     const qwertyLetters = QWERTY_LAYOUT.flat();
 
     qwertyLetters.forEach((letter) => {
@@ -30,6 +30,7 @@ describe("Keyboard", () => {
         isGameStarted={true}
         onKeyClick={() => {}}
         usedLetters={{ A: LETTER_STATE.correct, B: LETTER_STATE.incorrect }}
+        isMobile={false}
       />
     );
     const buttonA = screen.getByRole("button", { name: /letter a/i });
@@ -43,7 +44,7 @@ describe("Keyboard", () => {
 
   it("calls onKeyClick with correct letter when a key is clicked", () => {
     const handleClick = jest.fn();
-    render(<Keyboard isGameStarted={true} onKeyClick={handleClick} />);
+    render(<Keyboard isGameStarted={true} onKeyClick={handleClick} isMobile={false} />);
     fireEvent.click(screen.getByRole("button", { name: /letter m/i }));
     expect(handleClick).toHaveBeenCalledWith("M");
   });

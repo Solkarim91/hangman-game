@@ -8,19 +8,20 @@ import {
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { LetterTile } from "./letter-tile";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { letterTilesContainer } from "./selectors";
 
 type LetterTilesProps = {
   gameWords: string[];
   gameStatus: GameStatusType;
   usedLetters: Record<string, LetterStateType>;
+  isMobile: boolean;
 };
 
 export const LetterTiles: FC<LetterTilesProps> = ({
   gameWords,
   gameStatus,
   usedLetters,
+  isMobile
 }) => {
   const containsLongWords = useMemo(
     () => Boolean(gameWords?.find((word) => word.length >= 8)),
@@ -31,8 +32,6 @@ export const LetterTiles: FC<LetterTilesProps> = ({
     () => Boolean((gameWords?.reduce((sum, word) => sum + word.length, 0) ?? 0) >= 16),
     [gameWords]
   );
-
-  const isMobile = useIsMobile();
 
   const useCondensedSpacing = useMemo(() => {
     return (
@@ -73,6 +72,7 @@ export const LetterTiles: FC<LetterTilesProps> = ({
                     gameStatus={gameStatus}
                     containsLongWords={containsLongWords}
                     totalCharactersExceedsThreshold={totalCharactersExceedsThreshold}
+                    isMobile={isMobile}
                   />
                 </motion.div>
               ))}

@@ -8,6 +8,7 @@ type LetterTileProps = {
   char: string;
   containsLongWords: boolean;
   totalCharactersExceedsThreshold: boolean;
+  isMobile: boolean;
   state: LetterTileStateType;
   gameStatus: GameStatusType;
 };
@@ -16,12 +17,13 @@ export const LetterTile: FC<LetterTileProps> = ({
   char,
   containsLongWords,
   totalCharactersExceedsThreshold,
+  isMobile,
   state,
   gameStatus,
 }) => {
   const isSpace = char === " ";
 
-  const smallStyling = useMemo(() => containsLongWords || totalCharactersExceedsThreshold, [containsLongWords, totalCharactersExceedsThreshold]);
+  const smallStyling = useMemo(() => containsLongWords || totalCharactersExceedsThreshold || isMobile, [containsLongWords, totalCharactersExceedsThreshold, isMobile]);
 
   return (
     <div
