@@ -7,21 +7,30 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel/carousel";
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useMemo, useState } from "react";
 import { Category } from "./types";
+import { cn } from "@/lib/utils";
 
 type CategoryCarouselProps = {
   carouselItems: readonly Category[];
   selectedCategory: Category | undefined;
   setSelectedCategory: Dispatch<SetStateAction<Category | undefined>>;
+  isMobile: boolean;
 };
 
 export const CategoryCarousel: FC<CategoryCarouselProps> = ({
   carouselItems,
   selectedCategory,
   setSelectedCategory,
+  isMobile,
 }) => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const { axis, orientation }: { axis: "x" | "y", orientation: "vertical" | "horizontal" } = useMemo(() => {
+    return {
+      axis: isMobile ? "y" : "x",
+      orientation: isMobile ? "vertical" : "horizontal",
+    };
+  }, [isMobile]);
 
   useEffect(() => {
     if (!carouselApi) return;
@@ -51,13 +60,15 @@ export const CategoryCarousel: FC<CategoryCarouselProps> = ({
       opts={{
         align: "center",
         loop: true,
-        axis: "y",
+        axis: axis,
       }}
-      orientation="vertical"
-      className="w-[80%] max-w-xs"
+      orientation={orientation}
+      className={`${isMobile ? "w-[70%]" : "w-[90%]"}`}
       setApi={setCarouselApi}
     >
-      <CarouselContent className="-mt-1 h-[200px] font-main">
+      <CarouselContent className={cn("-mt-1 font-main", {
+        "h-[140px]": isMobile
+      })}>
         {carouselItems.map((itemTitle, index) => (
           <CarouselItem
             key={index}
@@ -67,21 +78,38 @@ export const CategoryCarousel: FC<CategoryCarouselProps> = ({
             <div className="p-1">
               <Card
                 className={
-                  selectedCategory === itemTitle
+                  `${selectedCategory === itemTitle
                     ? "bg-[#007eb6] text-white"
-                    : ""
+                    : ""}
+                    ${isMobile ? "py-3" : ""}`
                 }
               >
                 <CardContent className="flex items-center justify-center">
-                  <span className="text-2xl font-semibold">{itemTitle}</span>
+                  <span className="text-3xl font-semibold">
+                    {itemTitle}
+                  </span>
                 </CardContent>
               </Card>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="cursor-pointer hover:scale-105"/>
-      <CarouselNext className="cursor-pointer hover:scale-105"/>
+      <CarouselPrevious className={cn(
+          "cursor-pointer hover:scale-105", 
+          {
+            "-left-20": orientation === "horizontal",
+            "-top-18": orientation === "vertical"
+          }
+        )}
+      />
+      <CarouselNext className={cn(
+          "cursor-pointer hover:scale-105", 
+          {
+            "-right-20": orientation === "horizontal",
+            "-bottom-18": orientation === "vertical"
+          }
+        )}
+      />
     </Carousel>
   );
 };
