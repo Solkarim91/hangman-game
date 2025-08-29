@@ -1,13 +1,18 @@
 import Image from "next/image";
 import { logo } from "./selectors";
+import { FC } from "react";
 
-export const Logo = () => (
+type LogoProps = {
+  isMobile: boolean;
+};
+
+export const Logo: FC<LogoProps> = ({ isMobile }) => (
   <div className="flex flex-col items-center">
     <Image
       src="/hangman-logo.png"
       alt="Hangman logo"
-      width={200}
-      height={43}
+      width={isMobile ? 150 : 200}
+      height={isMobile ? 32.25 : 43}
       priority
       data-testid={logo}
     />
