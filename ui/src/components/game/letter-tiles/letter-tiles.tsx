@@ -5,7 +5,6 @@ import {
   LETTER_TILE_STATE,
   LETTER_TILE_VARIANTS,
 } from "../constants";
-import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { LetterTile } from "./letter-tile";
 import { letterTilesContainer } from "./selectors";
@@ -28,6 +27,11 @@ export const LetterTiles: FC<LetterTilesProps> = ({
     [gameWords]
   );
 
+  const containsVeryLongWords = useMemo(
+    () => Boolean(gameWords?.find((word) => word.length >= 11)),
+    [gameWords]
+  );
+
   const totalCharactersExceedsThreshold = useMemo(
     () => Boolean((gameWords?.reduce((sum, word) => sum + word.length, 0) ?? 0) >= 16),
     [gameWords]
@@ -41,7 +45,7 @@ export const LetterTiles: FC<LetterTilesProps> = ({
   }, [isMobile, containsLongWords, totalCharactersExceedsThreshold]);
 
   return (
-    <div className="flex flex-wrap gap-x-12 gap-y-4 max-w-[100vw] justify-center">
+    <>
       <AnimatePresence>
         <motion.div
           key={gameStatus}
@@ -54,7 +58,7 @@ export const LetterTiles: FC<LetterTilesProps> = ({
           {gameWords.map((word, wordIndex) => (
             <div
               key={`word-${wordIndex}`}
-              className={cn("flex", useCondensedSpacing ? "gap-1" : "gap-2")}
+              className={`flex ${useCondensedSpacing ? "gap-1" : "gap-2"}`}
               data-testid={letterTilesContainer}
             >
               {word.split("").map((char, charIndex) => (
@@ -71,6 +75,7 @@ export const LetterTiles: FC<LetterTilesProps> = ({
                     }
                     gameStatus={gameStatus}
                     containsLongWords={containsLongWords}
+                    containsVeryLongWords={containsVeryLongWords}
                     totalCharactersExceedsThreshold={totalCharactersExceedsThreshold}
                     isMobile={isMobile}
                   />
@@ -80,6 +85,6 @@ export const LetterTiles: FC<LetterTilesProps> = ({
           ))}
         </motion.div>
       </AnimatePresence>
-    </div>
+    </>
   );
 };

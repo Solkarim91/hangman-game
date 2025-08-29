@@ -26,9 +26,9 @@ export const UserFeedback: FC<UserFeedbackProps> = ({
             }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="text-4xl font-bold font-main justify-items-center mt-10"
+            className="justify-items-center mt-3 sm:mt-0 lg:mt-2"
           >
-            <p className="font-main text-4xl">{userSelectionFeedback}</p>
+            <p className="font-main font-bold text-3xl">{userSelectionFeedback}</p>
           </motion.div>
         )}
       </AnimatePresence>

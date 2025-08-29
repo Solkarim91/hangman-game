@@ -6,9 +6,10 @@ import { GameOverLogo } from "@/components/ui/game-over-logo";
 
 type GameIconProps = {
   gameStatus: GameStatusType;
+  isMobile: boolean;
 };
 
-export const GameIcon: FC<GameIconProps> = ({ gameStatus }) => {
+export const GameIcon: FC<GameIconProps> = ({ gameStatus, isMobile }) => {
   return (
     <div>
       <motion.div
@@ -18,7 +19,9 @@ export const GameIcon: FC<GameIconProps> = ({ gameStatus }) => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-3xl font-bold text-center font-main"
       >
-        {gameStatus !== "lost" ? <Logo /> : <GameOverLogo />}
+        {gameStatus !== "lost" ? 
+          <Logo isMobile={isMobile}/> :
+          <GameOverLogo isMobile={isMobile}/>}
       </motion.div>
     </div>
   );

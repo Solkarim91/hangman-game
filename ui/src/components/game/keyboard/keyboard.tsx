@@ -4,6 +4,7 @@ import React, { FC } from "react";
 import { KeyButton } from "./key-button";
 import { LETTER_STATE, QWERTY_LAYOUT } from "../constants";
 import { LetterStateType } from "../types";
+import { cn } from "@/lib/utils";
 
 type KeyboardProps = {
   onKeyClick: (letter: string) => void;
@@ -19,17 +20,17 @@ export const Keyboard: FC<KeyboardProps> = ({
   isMobile
 }) => {
   return (
-    <div className="absolute left-0 right-0 bottom-7.5 md:bottom-20">
+    <div className="absolute left-0 right-0 bottom-7.5 lg:bottom-4 2xl:bottom-20">
       {!isGameStarted && (
-        <div className="flex justify-center">
-          <p className="font-main text-2xl">
-            {"Choose a letter below to get started!"}
-          </p>
-        </div>
+        <p className={cn("flex justify-center font-main text-2xl", {
+          "text-xl": isMobile
+        })}>
+          {"Choose a letter below to get started!"}
+        </p>
       )}
-      <div className="flex flex-col gap-2 items-center mt-8">
+      <div className="flex flex-col gap-2 items-center mt-4">
         {QWERTY_LAYOUT.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex gap-2">
+          <div key={rowIndex} className="flex gap-1.5 sm:gap-2 xl:gap-3">
             {row.map((letter) => (
               <KeyButton
                 key={letter}
@@ -40,7 +41,6 @@ export const Keyboard: FC<KeyboardProps> = ({
                   usedLetters[letter] !== LETTER_STATE.default
                 }
                 state={usedLetters[letter] || LETTER_STATE.default}
-                isMobile={isMobile}
               />
             ))}
           </div>
