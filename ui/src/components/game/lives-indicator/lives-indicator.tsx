@@ -12,14 +12,12 @@ type LivesIndicatorProps = {
   maxLives: number;
   numOfIncorrectGuesses: number;
   gameStatus: GameStatusType;
-  isMobile: boolean;
 };
 
 export const LivesIndicator: FC<LivesIndicatorProps> = ({
   maxLives,
   numOfIncorrectGuesses,
   gameStatus,
-  isMobile
 }) => {
   return (
     <motion.div
@@ -27,9 +25,7 @@ export const LivesIndicator: FC<LivesIndicatorProps> = ({
       variants={LIFE_ICON_CONTAINER_VARIANTS}
       initial="initial"
       animate="animate"
-      className={cn("flex gap-2 justify-center my-8", {
-        "my-4": isMobile
-      })}
+      className="flex gap-2 justify-center my-3"
     >
       {Array.from({ length: maxLives }).map((_, i) => {
         const isLost = i >= maxLives - numOfIncorrectGuesses;
@@ -54,7 +50,7 @@ export const LivesIndicator: FC<LivesIndicatorProps> = ({
                   }
                 : undefined
             }
-            className="*:w-10 *:h-10"
+            className="*:w-8 *:h-8"
           >
             <Heart
               fill={!isLost ? "red" : "none"}

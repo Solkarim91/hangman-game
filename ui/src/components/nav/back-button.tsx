@@ -7,7 +7,7 @@ export const BackButton = () => {
   const handleBackButtonClick = () => router.back();
 
   return (
-    <button className="z-1 cursor-pointer hover:opacity-85" onClick={handleBackButtonClick}>
+    <button className="z-1 cursor-pointer hover:opacity-85 mx-2" onClick={handleBackButtonClick}>
       🔙
     </button>
   );

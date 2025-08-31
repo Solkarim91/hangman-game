@@ -12,7 +12,6 @@ import { GameOutcome } from "./game-outcome/game-outcome";
 import { UserFeedback } from "./user-feedback/user-feedback";
 import { GameIcon } from "./game-icon/game-icon";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { cn } from "@/lib/utils";
 
 type GameProps = {
   categoryName: string;
@@ -37,17 +36,14 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
 
   return (
     <>
-      <div className={cn("p-10 w-[100%] h-[70vh] flex flex-col justify-between sm:mt-0 relative", {
-        "p-6": isMobile
-      })}>
-        <GameIcon gameStatus={gameStatus} />
+      <div className="p-4 w-[100%] h-[70vh] flex flex-col justify-between sm:mt-0 relative gap-3 2xl:p-10">
+        <GameIcon gameStatus={gameStatus} isMobile={isMobile}/>
 
         {gameStatus === GAME_STATUS.won && (
           <GameOutcome
             outcomeMessage={GAME_OUTCOME_MESSAGES.won}
             resetGame={resetGame}
             handleNewCategory={handleNewCategory}
-            isMobile={isMobile}
           />
         )}
 
@@ -56,24 +52,18 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
             outcomeMessage={GAME_OUTCOME_MESSAGES.lost}
             resetGame={resetGame}
             handleNewCategory={handleNewCategory}
-            isMobile={isMobile}
           />
         )}
 
         {gameWords ? (
-          <>
+          <div className="text-center flex flex-col h-full max-w-[900px] self-center gap-3 lg:gap-2">
             {gameStatus === GAME_STATUS.playing && (
               <LivesIndicator
                 maxLives={maxLives}
                 numOfIncorrectGuesses={numOfIncorrectGuesses}
                 gameStatus={gameStatus}
-                isMobile={isMobile}
               />
             )}
-
-            <div
-              className={`text-center flex flex-col h-full max-w-[900px] self-center ${isGameStarted ? "" : "justify-between"}`}
-            >
               <LetterTiles
                 gameWords={gameWords}
                 gameStatus={gameStatus}
@@ -86,10 +76,11 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
                   userSelectionFeedback={userSelectionFeedback}
                 />
               )}
-            </div>
-          </>
+          </div>
         ) : (
-          <Loading />
+          <div className="flex items-center justify-center h-screen">
+            <Loading />
+          </div>
         )}
       </div>
       <div>
