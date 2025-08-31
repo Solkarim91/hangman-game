@@ -34,7 +34,7 @@ export default function Home() {
         "justify-start" : isMobile
       }
     )}>
-      <div className="mt-12">
+      <div className="mt-8 sm:mt-12">
         <Logo isMobile={isMobile} />
       </div>
 
@@ -42,24 +42,22 @@ export default function Home() {
 
       <div
         className={cn(
-          "flex flex-col items-center justify-around flex-1 px-4 text-center transition-opacity w-full",
+          "flex flex-col items-center justify-between flex-1 px-4 text-center transition-opacity w-full h-full py-4",
           {
             "opacity-0": isLoading,
           }
         )}
       >
-        <div className="flex flex-col items-center gap-y-25 xl:gap-y-10 w-full sm:w-[80%]">
-          <p className="font-main text-3xl max-w-[100%]">
-            {"To get started, pick a category below and then hit 'PLAY'!"}
-          </p>
+        <p className="font-main text-2xl md:text-3xl max-w-[100%]">
+          {"To get started, pick a category below and then hit 'PLAY'!"}
+        </p>
 
-          <CategoryCarousel
-            carouselItems={carouselItems}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            isMobile={isMobile}
-          />
-        </div>
+        <CategoryCarousel
+          carouselItems={carouselItems}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          isMobile={isMobile}
+        />
 
         <Button
           className="font-main text-3xl p-6 cursor-pointer hover:scale-105"
