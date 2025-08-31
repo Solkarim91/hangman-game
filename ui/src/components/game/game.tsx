@@ -71,7 +71,7 @@ export const Game: FC<GameProps> = ({ categoryName }) => {
                 isMobile={isMobile}
               />
 
-              {gameStatus === GAME_STATUS.playing && (
+              {gameStatus === GAME_STATUS.playing && !isMobile && (
                 <UserFeedback
                   userSelectionFeedback={userSelectionFeedback}
                 />

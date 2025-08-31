@@ -21,7 +21,7 @@ export const Keyboard: FC<KeyboardProps> = ({
 }) => {
   return (
     <div className="absolute left-0 right-0 bottom-7.5 lg:bottom-4 2xl:bottom-20">
-      {!isGameStarted && (
+      {!isGameStarted && !isMobile && (
         <p className={cn("flex justify-center font-main text-2xl", {
           "text-xl": isMobile
         })}>
