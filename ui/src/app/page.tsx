@@ -44,7 +44,7 @@ export default function Home() {
 
       <div
         className={cn(
-          "flex flex-col items-center justify-between flex-1 px-4 text-center transition-opacity w-full",
+          "flex flex-col items-center justify-between flex-1 px-4 text-center transition-opacity w-full py-4",
           {
             "opacity-0": isLoading,
           }
