@@ -28,13 +28,15 @@ export default function Home() {
   const isLoading = Boolean(!selectedCategory);
 
   return (
-    <div className={cn(
-      "flex flex-col items-center justify-between h-screen w-screen overflow-hidden",
-      {
-        "justify-start" : isMobile
-      }
-    )}>
-      <div className="mt-8 sm:mt-12">
+    <div
+      className={cn(
+        "flex flex-col items-center justify-between h-[100dvh] w-screen overflow-hidden",
+        {
+          "justify-start": isMobile,
+        }
+      )}
+    >
+      <div className="pt-8 sm:pt-12">
         <Logo isMobile={isMobile} />
       </div>
 
@@ -42,7 +44,7 @@ export default function Home() {
 
       <div
         className={cn(
-          "flex flex-col items-center justify-between flex-1 px-4 text-center transition-opacity w-full h-full py-4",
+          "flex flex-col items-center justify-between flex-1 px-4 text-center transition-opacity w-full",
           {
             "opacity-0": isLoading,
           }
