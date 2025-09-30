@@ -1,6 +1,6 @@
 # 🔤 Hangman Word Game
 
-A fun and interactive word-guessing game where players uncover hidden phrases by selecting letters. Featuring responsive animations, category-based word sets, and dynamic win/loss states.
+A fun and interactive word-guessing game where players uncover hidden phrases by selecting letters. Featuring responsive animations, category-based word sets, dynamic win/loss states, and automated testing.
 
 ---
 
@@ -21,6 +21,15 @@ A fun and interactive word-guessing game where players uncover hidden phrases by
 * 🎉 Confetti celebration on win
 * 🔁 Replay or select a new category
 * 📱 Mobile-optimized layout
+* 🚀 Deployed live with Vercel
+* 🧪 Includes unit and component tests
+
+---
+
+## 🌍 Live Demo
+
+Play the game here:
+[👉 Hangman Game on Vercel](https://hangman-game-ebon-nine.vercel.app/)
 
 ---
 
@@ -31,6 +40,7 @@ A fun and interactive word-guessing game where players uncover hidden phrases by
 * **Tailwind CSS** for styling
 * **Framer Motion** for animations
 * **Canvas Confetti** for win effects
+* **Jest + React Testing Library** for unit/component tests
 
 ---
 
@@ -60,6 +70,17 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to start pla
 
 ---
 
+## 🧪 Running Tests
+
+This project includes unit and component tests.
+Run all tests:
+
+```bash
+npm run test
+```
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -82,5 +103,3 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to start pla
 * [ ] Add difficulty level selector
 * [ ] Track player stats (wins/losses)
 * [ ] Improve accessibility (ARIA roles, screen reader support)
-* [ ] Improved responsive layout for larger screen sizes
-* [ ] Deploy live demo
