@@ -1,17 +1,14 @@
 # 🔤 Hangman Word Game
 
-A fun and interactive word-guessing game where players uncover hidden phrases by selecting letters. Featuring responsive animations, category-based word sets, and dynamic win/loss states.
+A fun and interactive word-guessing game where players uncover hidden phrases by selecting letters. Featuring responsive animations, category-based word sets, dynamic win/loss states, and automated testing.
 
 ---
 
 ## 🎮 Gameplay Preview
 
-* **Playing:** <br>
-![Playing the Game](https://i.ibb.co/Cs0HMTpY/Playing-gif.gif) 
-* **Winning:** <br>
-![Win State](https://i.ibb.co/pS3ZBxN/Game-won-gif.gif)
-* **Losing:** <br>
-![Lose State](https://i.ibb.co/hxDPVRxh/Game-lost-gif.gif)
+* **Playing:** ![Playing the Game](https://ibb.co/sJ3V6MpN)
+* **Winning:** ![Win State](https://ibb.co/8Hj2L0G)
+* **Losing:** ![Lose State](https://ibb.co/zWGyZhWj)
 
 ---
 
@@ -24,6 +21,15 @@ A fun and interactive word-guessing game where players uncover hidden phrases by
 * 🎉 Confetti celebration on win
 * 🔁 Replay or select a new category
 * 📱 Mobile-optimized layout
+* 🚀 Deployed live with Vercel
+* 🧪 Includes unit and component tests
+
+---
+
+## 🌍 Live Demo
+
+Play the game here:
+[👉 Hangman Game on Vercel](https://hangman-game-ebon-nine.vercel.app/)
 
 ---
 
@@ -34,6 +40,7 @@ A fun and interactive word-guessing game where players uncover hidden phrases by
 * **Tailwind CSS** for styling
 * **Framer Motion** for animations
 * **Canvas Confetti** for win effects
+* **Jest + React Testing Library** for unit/component tests
 
 ---
 
@@ -63,12 +70,23 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to start pla
 
 ---
 
+## 🧪 Running Tests
+
+This project includes unit and component tests.
+Run all tests:
+
+```bash
+npm run test
+```
+
+---
+
 ## 📁 Project Structure
 
 ```
 ├── app/
 ├── components/
-│   ├── category-carousel/
+│   ├── carousel/
 │   ├── game/
 │   ├── nav/
 │   ├── ui/
@@ -85,5 +103,3 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to start pla
 * [ ] Add difficulty level selector
 * [ ] Track player stats (wins/losses)
 * [ ] Improve accessibility (ARIA roles, screen reader support)
-* [ ] Improved responsive layout for larger screen sizes
-* [ ] Deploy live demo
