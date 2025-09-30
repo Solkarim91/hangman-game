@@ -1,20 +1,20 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { BackButton } from "./back-button";
 
-const mockBack = jest.fn();
+const mockPush = jest.fn();
 
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
-    back: mockBack,
+    push: mockPush,
     pathname: "/",
   }),
 }));
 
 describe("BackButton", () => {
-  it("calls router.back() when clicked", () => {
+  it("calls router.push() when clicked", () => {
     render(<BackButton />);
     const button = screen.getByRole("button");
     fireEvent.click(button);
-    expect(mockBack).toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalled();
   });
 });
